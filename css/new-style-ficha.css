@@ -1,0 +1,330 @@
+/* Estilos Globais */
+:root {
+    --primary-color: #8b4513;
+    --secondary-color: #daa520;
+    --background-color: #f5e6d3;
+    --text-color: #2c1810;
+    --accent-color: #654321;
+    --border-color: #8b4513;
+}
+
+body {
+    margin: 0;
+    font-family: 'MedievalSharp', cursive;
+    background: url('./files/World_of_Krynn_War_of_the_Lance_Art_by_Andrew_Kuzinsky_cropped.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+    position: relative;
+}
+
+/* Overlay de fundo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
+/* Cabeçalho */
+header {
+    background: linear-gradient(to bottom, #2c1c0d, #1a110a);
+    padding: 1rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+    border-bottom: 2px solid var(--secondary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+nav a {
+    color: var(--background-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Container Principal */
+.character-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Menu de Ações */
+.actions-menu {
+    background: rgba(44, 28, 13, 0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+    color: var(--background-color);
+    border: 2px solid var(--secondary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to bottom, var(--accent-color), var(--primary-color));
+}
+
+/* Ficha de Personagem */
+.character-sheet {
+    background: var(--background-color);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    position: relative;
+    border: 3px solid var(--border-color);
+}
+
+.sheet-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px double var(--border-color);
+}
+
+.sheet-header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2);
+}
+
+.sheet-header h2 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Seções */
+.info-section,
+.attributes-section,
+.combat-section,
+.equipment-section,
+.features-section {
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Grids */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+.combat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+/* Campos de Entrada */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    background: rgb(255, 255, 255);
+    font-family: 'MedievalSharp', cursive;
+    transition: all 0.3s ease;
+}
+
+/* XP Section */
+.xp-section {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    margin-top: 1rem;
+}
+
+.xp-next-level {
+    text-align: right;
+    color: var(--primary-color);
+}
+
+.xp-next-level span {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.xp-progress {
+    height: 8px;
+    background: rgba(139, 69, 19, 0.2);
+    border-radius: 4px;
+    margin-top: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.xp-progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.skill-item label {
+    flex: 1;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.2);
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: 'MedievalSharp', cursive;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(to top, #2c1c0d, #1a110a);
+    color: var(--background-color);
+    padding: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 2px solid var(--secondary-color);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: var(--background-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .attributes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .action-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .attributes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .character-sheet {
+        padding: 1rem;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.character-sheet {
+    animation: fadeIn 0.5s ease-out;
+}
