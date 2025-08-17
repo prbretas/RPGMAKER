@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/rules-script.js" defer></script>
+    <script src="../js/dice-script.js" defer></script>
+    <link rel="stylesheet" href="../common-styles.css">
+    <link rel="stylesheet" href="../css/style-rules.css" />
+    <!-- Fonte medieval -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <title>RPG D&D Regras</title>
+  </head>
+  <body>
+    <header>
+      <h1>🛡️ RPG Masters</h1>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="./rules.html">Regras</a>
+        <a href="./historia.html">História</a>
+        <a href="./ficha.html">Ficha</a>
+      </nav>
+    </header>
+
+
+    <section id="sectionDados">
+      <div class="divDados">
+        <h1>🎲 Gerador de Dados de RPG 🎲</h1>
+        <div class="dice-container">
+          <div id="divBotoes">
+            <div class="dice-buttons">
+              <button onclick="selectDice(4)">🎲d4</button>
+              <button onclick="selectDice(6)">🎲d6</button>
+              <button onclick="selectDice(8)">🎲d8</button>
+              <br>
+              <button onclick="selectDice(10)">🎲d10</button>
+              <button onclick="selectDice(12)">🎲d12</button>
+              <button onclick="selectDice(20)">🎲d20</button>
+              <button onclick="selectDice(100)">🎲d100</button>
+            </div>
+            <br>
+            <div>
+              <label for="rolls">Qtd. de Rolagens:</label>
+              <input type="number" id="rolls" min="1" value="1" />
+            </div>
+
+            <button id="rollBtn" onclick="rollDice()">🎲 Gerar</button>
+
+            <div id="result">Selecione um dado e clique em "Gerar"</div>
+            <img src="../assets/images/d&d-dnd.gif" alt="">
+          </div>
+          <div class="dice-history">
+            <h2>Histórico de Rolagens</h2>
+            <div id="history-container">
+              <!-- O histórico será adicionado aqui via JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sectionRules">
+      <h1>LIVROS e Regras</h1>
+
+      <h3>Livro do Mestre</h3>
+      <iframe
+        class="iframe-books"
+        src="https://online.anyflip.com/czfqj/pdai/index.html"
+        seamless="seamless"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true"
+        allowfullscreen="true"
+      ></iframe>
+      <h3>Livro do Jogador</h3>
+      <iframe
+        class="iframe-books"
+        src="https://online.anyflip.com/iysif/dldz/index.html"
+        seamless="seamless"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true"
+        allowfullscreen="true"
+      ></iframe>
+      <h3>Livro dos Monstros</h3>
+      <iframe
+        class="iframe-books"
+        src="https://online.anyflip.com/iyqz/ggdt/index.html"
+        seamless="seamless"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true"
+        allowfullscreen="true"
+      ></iframe>
+    </section>
+  </body>
+</html>

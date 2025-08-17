@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/ficha-script.js" defer></script>
+    <link rel="stylesheet" href="../common-styles.css" />
+    <link rel="stylesheet" href="../css/style-ficha.css" />
+    <title>RPG D&D Ficha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome para ícones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1><i class="fas fa-shield-alt"></i> RPG Masters</h1>
+      <nav>
+        <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="./rules.html"><i class="fas fa-book"></i> Regras</a>
+        <a href="./historia.html"><i class="fas fa-scroll"></i> História</a>
+        <a href="./ficha.html"><i class="fas fa-user-shield"></i> Ficha</a>
+      </nav>
+    </header>
+
+    <section class="sectionChar">
+      <div class="character-sheet">
+        <div class="sheet-header">
+          <!--
+          <img src="./files/d&d-dnd.gif" alt="D&D Logo" class="dnd-logo" /> -->
+          <h1>FICHA DE PERSONAGEM</h1>
+        </div>
+        <!--BOTOES PARA SALVAR CARREGAR, EXPORT, IMPORT-->
+        <div class="actions-bar">
+          <button onclick="saveCharacter()" class="action-button">
+            💾 Salvar Personagem
+          </button>
+          <button onclick="loadCharacter()" class="action-button">
+            📂 Carregar Personagem
+          </button>
+          <button onclick="exportToJson()" class="action-button">
+            📤 Exportar JSON
+          </button>
+          <button onclick="importFromJson()" class="action-button">
+            📥 Importar JSON
+          </button>
+          <input
+            type="file"
+            id="jsonFileInput"
+            accept=".json"
+            style="display: none"
+          />
+        </div>
+
+        <form id="characterForm" class="character-form">
+          <!-- Informações Básicas -->
+          <div class="form-section basic-info-section">
+            <h2><i class="fas fa-user"></i> Informações Básicas</h2>
+            <div class="basic-info-container">
+              <!-- Coluna 1: Informações do Personagem e Imagem -->
+              <div class="basic-info-column">
+                <div class="character-image-container">
+                  <div class="character-image-wrapper">
+                    <img id="characterImage" alt="Imagem do Personagem" />
+                    <div class="image-controls">
+                      <button type="button" class="image-control-btn" id="zoomInBtn" onclick="zoomIn()">
+                        <i class="fas fa-search-plus"></i>
+                      </button>
+                      <button type="button" class="image-control-btn" id="zoomOutBtn" onclick="zoomOut()">
+                        <i class="fas fa-search-minus"></i>
+                      </button>
+                      <button type="button" class="image-control-btn" id="resetImageBtn" onclick="resetImage()">
+                        <i class="fas fa-redo"></i>
+                      </button>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)" />
+                    <button type="button" class="change-image-btn" onclick="document.getElementById('imageInput').click()">
+                      <i class="fas fa-camera"></i> Alterar Imagem
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group-full">
+                  <label for="characterName">
+                    <i class="fas fa-signature"></i> Nome do Personagem
+                  </label>
+                  <input type="text" id="characterName" name="characterName" placeholder="Nome do seu personagem" />
+                </div>
+                <div class="form-group-row">
+                  <div class="form-group-half">
+                    <label for="characterClass">
+                      <i class="fas fa-hat-wizard"></i> Classe
+                    </label>
+                    <input type="text" id="characterClass" name="characterClass" placeholder="Ex: Guerreiro" />
+                  </div>
+                  <div class="form-group-small">
+                    <label for="characterLevel">Nível</label>
+                    <input type="number" id="characterLevel" name="characterLevel" min="1" max="20" value="1" />
+                  </div>
+                </div>
+                <div class="form-group-full">
+                  <label for="playerName">
+                    <i class="fas fa-user-circle"></i> Nome do Jogador
+                  </label>
+                  <input type="text" id="playerName" name="playerName" placeholder="Seu nome" />
+                </div>
+              </div>
+
+              <!-- Coluna 2: Informações de Origem -->
+              <div class="basic-info-column">
+                <div class="form-group-full">
+                  <label for="race">
+                    <i class="fas fa-users"></i> Raça
+                  </label>
+                  <input type="text" id="race" name="race" placeholder="Ex: Humano" />
+                </div>
+                <div class="form-group-full">
+                  <label for="background">
+                    <i class="fas fa-scroll"></i> Antecedente
+                  </label>
+                  <input type="text" id="background" name="background" placeholder="Ex: Herói do Povo" />
+                </div>
+                <div class="form-group-full">
+                  <label for="alignment">
+                    <i class="fas fa-balance-scale"></i> Tendência
+                  </label>
+                  <select id="alignment" name="alignment">
+                    <option value="">Selecione...</option>
+                    <option value="LB">Leal e Bom</option>
+                    <option value="NB">Neutro e Bom</option>
+                    <option value="CB">Caótico e Bom</option>
+                    <option value="LN">Leal e Neutro</option>
+                    <option value="NN">Neutro</option>
+                    <option value="CN">Caótico e Neutro</option>
+                    <option value="LM">Leal e Mau</option>
+                    <option value="NM">Neutro e Mau</option>
+                    <option value="CM">Caótico e Mau</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Coluna 3: XP e Progressão -->
+              <div class="basic-info-column xp-info-column">
+                <div class="form-group-row">
+                  <div class="form-group-half">
+                    <label for="experiencePoints">
+                      <i class="fas fa-star"></i> Pontos de Experiência
+                    </label>
+                    <input type="number" id="experiencePoints" name="experiencePoints" min="0" value="0" />
+                  </div>
+                  <div class="form-group-half">
+                    <label for="proficiencyBonus">
+                      <i class="fas fa-plus-circle"></i> Bônus de Proficiência
+                    </label>
+                    <input type="number" id="proficiencyBonus" name="proficiencyBonus" value="2" readonly />
+                  </div>
+                </div>
+                <div class="xp-section">
+                  <div class="xp-next-level">
+                    <label>Próximo Nível</label>
+                    <span id="nextLevelXP">300</span>
+                  </div>
+                  <div class="xp-progress">
+                    <div id="xpProgressBar" class="xp-progress-bar"></div>
+                  </div>
+                </div>
+                <div class="inspiration-section">
+                  <div class="form-group-full">
+                    <label for="inspiration">
+                      <i class="fas fa-lightbulb"></i> Inspiração
+                    </label>
+                    <div class="inspiration-checkbox">
+                      <input type="checkbox" id="inspiration" name="inspiration" />
+                      <span class="inspiration-label">Disponível</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Atributos -->
+          <div class="form-section">
+            <h2><i class="fas fa-dice-d20"></i> Atributos</h2>
+            <div class="attributes-grid">
+              <div class="attribute-box">
+                <label for="strength">
+                  <i class="fas fa-fist-raised"></i> Força
+                </label>
+                <input
+                  type="number"
+                  id="strength"
+                  name="strength"
+                  min="1"
+                  max="20"
+                  placeholder="10"
+                />
+                <span class="attribute-modifier" id="strengthMod">+0</span>
+              </div>
+              <div class="attribute-box">
+                <label for="dexterity">
+                  <i class="fas fa-running"></i> Destreza
+                </label>
+                <input
+                  type="number"
+                  id="dexterity"
+                  name="dexterity"
+                  min="1"
+                  max="20"
+                  placeholder="10"
+                />
+                <span class="attribute-modifier" id="dexterityMod">+0</span>
+              </div>
+              <div class="attribute-box">
+                <label for="constitution">
+                  <i class="fas fa-heart"></i> Constituição
+                </label>
+                <input
+                  type="number"
+                  id="constitution"
+                  name="constitution"
+                  min="1"
+                  max="20"
+                  placeholder="10"
+                />
+                <span class="attribute-modifier" id="constitutionMod">+0</span>
+              </div>
+              <div class="attribute-box">
+                <label for="intelligence">
+                  <i class="fas fa-brain"></i> Inteligência
+                </label>
+                <input
+                  type="number"
+                  id="intelligence"
+                  name="intelligence"
+                  min="1"
+                  max="20"
+                  placeholder="10"
+                />
+                <span class="attribute-modifier" id="intelligenceMod">+0</span>
+              </div>
+              <div class="attribute-box">
+                <label for="wisdom">
+                  <i class="fas fa-eye"></i> Sabedoria
+                </label>
+                <input
+                  type="number"
+                  id="wisdom"
+                  name="wisdom"
+                  min="1"
+                  max="20"
+                  placeholder="10"
+                />
+                <span class="attribute-modifier" id="wisdomMod">+0</span>
+              </div>
+              <div class="attribute-box">
+                <label for="charisma">
+                  <i class="fas fa-comment-dots"></i> Carisma
+                </label>
+                <input
+                  type="number"
+                  id="charisma"
+                  name="charisma"
+                  min="1"
+                  max="20"
+                  placeholder="10"
+                />
+                <span class="attribute-modifier" id="charismaMod">+0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Combate -->
+          <div class="form-section">
+            <h2>Informações de Combate</h2>
+            <div class="combat-grid">
+              <div class="form-group">
+                <label for="armorClass">Classe de Armadura:</label>
+                <input type="number" id="armorClass" name="armorClass" />
+              </div>
+              <div class="form-group">
+                <label for="initiative">Iniciativa:</label>
+                <input type="number" id="initiative" name="initiative" />
+              </div>
+              <div class="form-group">
+                <label for="speed">Deslocamento:</label>
+                <input type="text" id="speed" name="speed" />
+              </div>
+              <div class="form-group">
+                <label for="currentHp">Pontos de Vida Atual:</label>
+                <input type="number" id="currentHp" name="currentHp" />
+              </div>
+              <div class="form-group">
+                <label for="maxHp">Pontos de Vida Máximo:</label>
+                <input type="number" id="maxHp" name="maxHp" />
+              </div>
+              <div class="form-group">
+                <label for="tempHp">Pontos de Vida Temporário:</label>
+                <input type="number" id="tempHp" name="tempHp" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Perícias -->
+          <div class="form-section" id="skillsSection">
+            <h2>Perícias</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <input type="checkbox" id="acrobatics" name="acrobatics" />
+                <label for="acrobatics">Acrobacia (Des)</label>
+                <span class="skill-modifier" id="acrobaticsMod">+0</span>
+              </div>
+              <div class="skill-item">
+                <input
+                  type="checkbox"
+                  id="animalHandling"
+                  name="animalHandling"
+                />
+                <label for="animalHandling">Adestrar Animais (Sab)</label>
+                <span class="skill-modifier" id="animalHandlingMod">+0</span>
+              </div>
+              <div class="skill-item">
+                <input type="checkbox" id="arcana" name="arcana" />
+                <label for="arcana">Arcanismo (Int)</label>
+                <span class="skill-modifier" id="arcanaMod">+0</span>
+              </div>
+              <!-- Adicione mais perícias conforme necessário -->
+            </div>
+          </div>
+
+          <!-- Equipamento e Itens -->
+          <div class="form-section">
+            <h2>Equipamento e Itens</h2>
+            <div class="equipment-grid">
+              <div class="equipment-table-container">
+                <div class="equipment-header">
+                  <div class="weight-info">
+                    <span>Capacidade de Carga: <span id="carryingCapacity">0</span> kg</span>
+                    <span>Peso Atual: <span id="currentWeight">0</span> kg</span>
+                  </div>
+                  <button type="button" class="action-button add-item-btn" onclick="addEquipmentRow()">
+                    <i class="fas fa-plus"></i> Adicionar Item
+                  </button>
+                </div>
+                <table class="equipment-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Quantidade</th>
+                      <th>Peso Unit. (kg)</th>
+                      <th>Peso Total (kg)</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="equipmentTableBody">
+                    <!-- Linhas serão adicionadas via JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="currency-section">
+                <h3>Moedas</h3>
+                <div class="currency-group">
+                  <div class="form-group">
+                    <label for="copper">PC (Cobre):</label>
+                    <input type="number" id="copper" name="copper" value="0" min="0" onchange="updateCoinWeight()" />
+                  </div>
+                  <div class="form-group">
+                    <label for="silver">PP (Prata):</label>
+                    <input type="number" id="silver" name="silver" value="0" min="0" onchange="updateCoinWeight()" />
+                  </div>
+                  <div class="form-group">
+                    <label for="gold">PO (Ouro):</label>
+                    <input type="number" id="gold" name="gold" value="0" min="0" onchange="updateCoinWeight()" />
+                  </div>
+                  <div class="form-group">
+                    <label for="platinum">PL (Platina):</label>
+                    <input type="number" id="platinum" name="platinum" value="0" min="0" onchange="updateCoinWeight()" />
+                  </div>
+                </div>
+                <div class="coin-weight">
+                  Peso total das moedas: <span id="coinWeight">0</span> kg
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Magias -->
+          <div class="form-section">
+            <h2>Magias</h2>
+            <div class="spells-grid">
+              <div class="form-group">
+                <label for="spellcastingClass">Classe de Conjuração:</label>
+                <input
+                  type="text"
+                  id="spellcastingClass"
+                  name="spellcastingClass"
+                />
+              </div>
+              <div class="form-group">
+                <label for="spellcastingAbility"
+                  >Habilidade de Conjuração:</label
+                >
+                <input
+                  type="text"
+                  id="spellcastingAbility"
+                  name="spellcastingAbility"
+                />
+              </div>
+              <div class="form-group">
+                <label for="spellSaveDC">CD de Salvamento:</label>
+                <input type="number" id="spellSaveDC" name="spellSaveDC" />
+              </div>
+              <div class="form-group">
+                <label for="spellAttackBonus">Bônus de Ataque:</label>
+                <input
+                  type="number"
+                  id="spellAttackBonus"
+                  name="spellAttackBonus"
+                />
+              </div>
+            </div>
+            <div class="spells-list">
+              <h3>Lista de Magias</h3>
+              <textarea id="spellsList" name="spellsList" rows="6"></textarea>
+            </div>
+          </div>
+
+          <!-- Características e Talentos -->
+          <div class="form-section">
+            <h2>Características e Talentos</h2>
+            <div class="features-grid">
+              <div class="form-group">
+                <label for="features">Características:</label>
+                <textarea id="features" name="features" rows="6"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="proficiencies">Proficiências:</label>
+                <textarea
+                  id="proficiencies"
+                  name="proficiencies"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- História do Personagem -->
+          <div class="form-section">
+            <h2>História do Personagem</h2>
+            <div class="background-grid">
+              <div class="form-group">
+                <label for="personalityTraits">Traços de Personalidade:</label>
+                <textarea
+                  id="personalityTraits"
+                  name="personalityTraits"
+                  rows="2"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="ideals">Ideais:</label>
+                <textarea id="ideals" name="ideals" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="bonds">Vínculos:</label>
+                <textarea id="bonds" name="bonds" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="flaws">Defeitos:</label>
+                <textarea id="flaws" name="flaws" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="backgroundStory">História de Origem:</label>
+                <textarea
+                  id="backgroundStory"
+                  name="backgroundStory"
+                  rows="6"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>&copy; 2025 RPG Masters. Todos os direitos reservados.</footer>
+  </body>
+</html>

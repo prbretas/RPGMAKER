@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/index-script.js" defer></script>
+    <link rel="stylesheet" href="./common-styles.css">
+    <link rel="stylesheet" href="./css/style-index.css" />
+    <title>🛡️ RPG Masters</title>
+    <!-- Fonte medieval -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SwiperJS CSS para o carrossel -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+
+  </head>
+  <body>
+    <header>
+      <h1>🛡️ RPG Masters</h1>
+      <nav>
+        <a href="./index.html">Home</a>
+        <a href="./pages/rules.html">Regras</a>
+        <a href="./pages/historia.html">História</a>
+        <a href="./pages/ficha.html">Ficha</a>
+      </nav>
+    </header>
+
+
+    <div class="container">
+      <h2>🌟 Bem-vindo ao mundo da aventura!</h2>
+      <p>Explore terras mágicas, enfrente dragões e crie sua própria lenda.</p>
+
+      <!-- Carrossel -->
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img
+              src="./assets/images/c9c63a64af9822b844d29c57bc94756e.jpg"
+              alt="RPG 1"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="./assets/images/bdb204e93d8379fdbbf70f62d40b53c3.jpg"
+              alt="RPG 2"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="./assets/images/1c134d30a6b913602317eb6d5bcc0eef.jpg"
+              alt="RPG 3"
+            />
+          </div>
+        </div>
+        <!-- Navegação -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <footer>&copy; 2025 RPG Masters. Todos os direitos reservados.</footer>
+
+    <!-- SwiperJS JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        loop: true,
+        autoplay: {
+          delay: 3000,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>
